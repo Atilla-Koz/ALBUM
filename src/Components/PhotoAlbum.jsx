@@ -1,72 +1,75 @@
-import photo1 from '../assets/Photos/a.webp';
-
-const photos = [
-  {
-    src: photo1,
-    title: 'İlk Resim',
-    description: 'Bu benim ilk fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-  {
-    src: photo1,
-    title: 'İkinci Resim',
-    description: 'Bu benim ikinci fotoğrafım.',
-  },
-];
+import { useState, useEffect } from 'react';
+import a from '../assets/Photos/a.webp';
+import b from '../assets/Photos/b.webp';
+import c from '../assets/Photos/c.webp';
 
 export default function PhotoAlbum() {
+  // Resim listesi ve açıklamaları
+  const images = [
+    { src: a, date: '2023-11-01', description: 'Güneşli bir gün sahilde.' },
+    { src: b, date: '2023-10-15', description: 'Ormanda yürüyüş keyfi.' },
+    { src: c, date: '2023-09-10', description: 'Dağlarda huzurlu bir an.' },
+  ];
+
+  // Şu anki resmin indexini tutan state
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  // Rasgele bir resim seç
+  const getRandomImage = () => {
+    let randomIndex = Math.floor(Math.random() * images.length);
+    while (randomIndex === currentIndex) {
+      randomIndex = Math.floor(Math.random() * images.length);
+    }
+    setCurrentIndex(randomIndex);
+  };
+
+  // Çift tıklama eventi
+  const handleDoubleClick = () => {
+    getRandomImage();
+  };
+
+  // Telefona sallama eventi
+  useEffect(() => {
+    const handleMotion = (event) => {
+      const { acceleration } = event;
+      if (
+        acceleration &&
+        (Math.abs(acceleration.x) > 15 ||
+          Math.abs(acceleration.y) > 15 ||
+          Math.abs(acceleration.z) > 15)
+      ) {
+        getRandomImage();
+      }
+    };
+
+    window.addEventListener('devicemotion', handleMotion);
+
+    // Event'i kaldırmayı unutma
+    return () => {
+      window.removeEventListener('devicemotion', handleMotion);
+    };
+  }, [currentIndex]);
+
   return (
-    <div className="p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
-      {photos.map((photo, index) => (
-        <div
-          key={index}
-          className={`overflow-hidden rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300 ${
-            index % 2 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1'
-          }`}
-          style={{
-            border: '15px solid #8B4513',
-            boxShadow: '0 8px 16px rgba(0, 0, 0, 0.3)',
-            backgroundColor: '#f9f5e6',
-          }}
-        >
-          <div className="p-2 bg-gray-200">
-            <img
-              src={photo.src}
-              alt={photo.title}
-              className="w-full h-auto object-cover"
-              style={{ padding: '10px' }}
-            />
-          </div>
-          <div className="p-4 bg-white border-t-8 border-solid border-gray-700">
-            <h2 className="text-xl font-semibold">{photo.title}</h2>
-            <p className="text-gray-600">{photo.description}</p>
-          </div>
+    <div
+      className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500"
+      onDoubleClick={handleDoubleClick}
+    >
+      <div className="p-6 bg-white rounded-3xl shadow-2xl text-center">
+        <img
+          src={images[currentIndex].src}
+          alt="Random"
+          className="rounded-lg border-4 border-gray-300 shadow-lg max-w-full max-h-[500px]"
+        />
+        <div className="mt-4">
+          <p className="text-lg font-semibold text-gray-700">
+            {images[currentIndex].date}
+          </p>
+          <p className="text-sm text-gray-500">
+            {images[currentIndex].description}
+          </p>
         </div>
-      ))}
+      </div>
     </div>
   );
 }
