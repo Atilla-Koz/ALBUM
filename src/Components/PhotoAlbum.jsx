@@ -14,10 +14,10 @@ export default function PhotoAlbum() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
-  const [longPressTimeout, setLongPressTimeout] = useState(null);
   const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
 
   const frontRef = useRef(null);
+  const touchStartRef = useRef(null); // Kaydırma başlangıç pozisyonunu tutar
 
   const getRandomImage = () => {
     let randomIndex = Math.floor(Math.random() * images.length);
@@ -36,22 +36,32 @@ export default function PhotoAlbum() {
     }, 600);
   };
 
-  const handleLongPressStart = () => {
-    const timeout = setTimeout(() => {
+  const handleTouchStart = (e) => {
+    // Dokunma başlangıç pozisyonunu kaydet
+    const touch = e.touches[0];
+    touchStartRef.current = { x: touch.clientX, y: touch.clientY };
+  };
+
+  const handleTouchMove = (e) => {
+    if (!touchStartRef.current) return;
+
+    const touch = e.touches[0];
+    const deltaX = touch.clientX - touchStartRef.current.x;
+
+    // Sola veya sağa kaydırma hareketini algıla
+    if (Math.abs(deltaX) > 100) {
+      // Flip hareketini tetikle
       if (frontRef.current) {
         const { offsetWidth: width, offsetHeight: height } = frontRef.current;
         setCardDimensions({ width, height });
       }
       setIsFlipped((prev) => !prev);
-    }, 500);
-    setLongPressTimeout(timeout);
+      touchStartRef.current = null; // Kaydırma işlemi tamamlandı
+    }
   };
 
-  const handleLongPressEnd = () => {
-    if (longPressTimeout) {
-      clearTimeout(longPressTimeout);
-      setLongPressTimeout(null);
-    }
+  const handleTouchEnd = () => {
+    touchStartRef.current = null; // Kaydırma başlangıcını sıfırla
   };
 
   useEffect(() => {
@@ -85,9 +95,9 @@ export default function PhotoAlbum() {
         {/* Ön Yüz */}
         <div
           ref={frontRef}
-          onMouseDown={handleLongPressStart}
-          onMouseUp={handleLongPressEnd}
-          onMouseLeave={handleLongPressEnd}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
           className={`p-6 bg-white rounded-3xl shadow-2xl text-center transform transition-transform duration-500 ${
             isRotating ? 'rotate-y-180' : ''
           }`}
@@ -103,9 +113,6 @@ export default function PhotoAlbum() {
 
         {/* Arka Yüz */}
         <div
-          onMouseDown={handleLongPressStart}
-          onMouseUp={handleLongPressEnd}
-          onMouseLeave={handleLongPressEnd}
           style={{
             width: cardDimensions.width || 'auto',
             height: cardDimensions.height || 'auto',
