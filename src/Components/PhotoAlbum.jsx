@@ -1,23 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import CardFlip from 'react-card-flip';
 import a from '../assets/Photos/a.webp';
 import b from '../assets/Photos/b.webp';
 import c from '../assets/Photos/c.webp';
 
 export default function PhotoAlbum() {
-  // Resim listesi ve açıklamaları
   const images = [
     { src: a, date: '2023-11-01', description: 'Güneşli bir gün sahilde.' },
     { src: b, date: '2023-10-15', description: 'Ormanda yürüyüş keyfi.' },
     { src: c, date: '2023-09-10', description: 'Dağlarda huzurlu bir an.' },
   ];
 
-  // Şu anki resmin indexini tutan state
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Animasyon durumu için state
+  const [isFlipped, setIsFlipped] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
+  const [longPressTimeout, setLongPressTimeout] = useState(null);
+  const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
 
-  // Rasgele bir resim seç
+  // Ref to track the front face dimensions
+  const frontRef = useRef(null);
+
   const getRandomImage = () => {
     let randomIndex = Math.floor(Math.random() * images.length);
     while (randomIndex === currentIndex) {
@@ -26,16 +28,34 @@ export default function PhotoAlbum() {
     setCurrentIndex(randomIndex);
   };
 
-  // Çift tıklama eventi
   const handleDoubleClick = () => {
-    setIsRotating(true); // Döndürme animasyonunu başlat
+    setIsRotating(true);
     setTimeout(() => {
-      getRandomImage(); // Yeni fotoğrafı getir
-      setIsRotating(false); // Animasyonu sıfırla
-    }, 600); // Animasyon süresine uygun zaman ayarı
+      getRandomImage();
+      setIsRotating(false);
+      setIsFlipped(false);
+    }, 600);
   };
 
-  // Telefona sallama eventi
+  const handleLongPressStart = () => {
+    const timeout = setTimeout(() => {
+      // Capture dimensions of the front face
+      if (frontRef.current) {
+        const { offsetWidth: width, offsetHeight: height } = frontRef.current;
+        setCardDimensions({ width, height });
+      }
+      setIsFlipped((prev) => !prev);
+    }, 500);
+    setLongPressTimeout(timeout);
+  };
+
+  const handleLongPressEnd = () => {
+    if (longPressTimeout) {
+      clearTimeout(longPressTimeout);
+      setLongPressTimeout(null);
+    }
+  };
+
   useEffect(() => {
     const handleMotion = (event) => {
       const { acceleration } = event;
@@ -51,7 +71,6 @@ export default function PhotoAlbum() {
 
     window.addEventListener('devicemotion', handleMotion);
 
-    // Event'i kaldırmayı unutma
     return () => {
       window.removeEventListener('devicemotion', handleMotion);
     };
@@ -62,19 +81,37 @@ export default function PhotoAlbum() {
       className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full"
       onDoubleClick={handleDoubleClick}
     >
-      <div
-        className={`p-6 bg-white rounded-3xl shadow-2xl text-center transform transition-transform duration-500 ${
-          isRotating ? 'rotate-y-180' : ''
-        }`}
-      >
-        <img
-          src={images[currentIndex].src}
-          alt="Random"
-          className={`rounded-lg border-4 border-gray-300 shadow-lg max-w-full max-h-[500px] transform transition-opacity duration-500 ${
-            isRotating ? 'opacity-0' : 'opacity-100'
+      <CardFlip isFlipped={isFlipped} flipDirection="horizontal">
+        {/* Ön Yüz */}
+        <div
+          ref={frontRef}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
+          className={`p-6 bg-white rounded-3xl shadow-2xl text-center transform transition-transform duration-500 ${
+            isRotating ? 'rotate-y-180' : ''
           }`}
-        />
-        <div className="mt-4">
+        >
+          <img
+            src={images[currentIndex].src}
+            alt="Random"
+            className={`rounded-lg border-4 border-gray-300 shadow-lg w-full h-auto max-h-[500px] transform transition-opacity duration-500 ${
+              isRotating ? 'opacity-0' : 'opacity-100'
+            }`}
+          />
+        </div>
+
+        {/* Arka Yüz */}
+        <div
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
+          style={{
+            width: cardDimensions.width || 'auto',
+            height: cardDimensions.height || 'auto',
+          }}
+          className="p-6 bg-white rounded-3xl shadow-2xl text-center flex flex-col items-center justify-center"
+        >
           <p className="text-lg font-semibold text-gray-700">
             {images[currentIndex].date}
           </p>
@@ -82,7 +119,7 @@ export default function PhotoAlbum() {
             {images[currentIndex].description}
           </p>
         </div>
-      </div>
+      </CardFlip>
     </div>
   );
 }
