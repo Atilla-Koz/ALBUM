@@ -1,22 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
 import CardFlip from 'react-card-flip';
-import a from '../assets/Photos/a.webp';
-import b from '../assets/Photos/b.webp';
-import c from '../assets/Photos/c.webp';
+import { images } from '../data';
 
 export default function PhotoAlbum() {
-  const images = [
-    { src: a, date: '2023-11-01', description: 'Güneşli bir gün sahilde.' },
-    { src: b, date: '2023-10-15', description: 'Ormanda yürüyüş keyfi.' },
-    { src: c, date: '2023-09-10', description: 'Dağlarda huzurlu bir an.' },
-  ];
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
   const [longPressTimeout, setLongPressTimeout] = useState(null);
   const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
-  const [shownCards, setShownCards] = useState([]); // Gösterilen kartların indekslerini tutar
+  const [shownCards, setShownCards] = useState([]);
 
   const frontRef = useRef(null);
   const touchStartRef = useRef(null);
@@ -114,8 +106,8 @@ export default function PhotoAlbum() {
     <div
       className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full"
       onDoubleClick={handleDoubleClick}
-      onContextMenu={(e) => e.preventDefault()} // Sağ tıklamayı devre dışı bırak
-      style={{ userSelect: 'none' }} // Yazı seçimini devre dışı bırak
+      onContextMenu={(e) => e.preventDefault()}
+      style={{ userSelect: 'none' }}
     >
       <CardFlip isFlipped={isFlipped} flipDirection="horizontal">
         {/* Ön Yüz */}
