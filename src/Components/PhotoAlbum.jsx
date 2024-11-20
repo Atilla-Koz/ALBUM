@@ -19,7 +19,6 @@ export default function PhotoAlbum() {
       .filter((index) => !shownCards.includes(index));
 
     if (remainingCards.length === 0) {
-      // Eğer tüm kartlar gösterildiyse, listeyi sıfırla
       setShownCards([]);
       remainingCards = images.map((_, index) => index);
     }
@@ -130,6 +129,12 @@ export default function PhotoAlbum() {
               isRotating ? 'opacity-0' : 'opacity-100'
             }`}
           />
+          <p className="mt-4 text-xl font-semibold text-gray-700">
+            {images[currentIndex].date}
+          </p>
+          <p className="mt-2 text-sm text-gray-500">
+            {images[currentIndex].description}
+          </p>
         </div>
 
         {/* Arka Yüz */}
@@ -147,10 +152,7 @@ export default function PhotoAlbum() {
           className="p-6 bg-white rounded-3xl shadow-2xl text-center flex flex-col items-center justify-center"
         >
           <p className="text-lg font-semibold text-gray-700">
-            {images[currentIndex].date}
-          </p>
-          <p className="text-sm text-gray-500">
-            {images[currentIndex].description}
+            {images[currentIndex].secondDescription || 'Ek açıklama yok.'}
           </p>
         </div>
       </CardFlip>
