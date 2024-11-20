@@ -17,7 +17,6 @@ export default function PhotoAlbum() {
   const [longPressTimeout, setLongPressTimeout] = useState(null);
   const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
 
-  // Ref to track the front face dimensions
   const frontRef = useRef(null);
 
   const getRandomImage = () => {
@@ -39,7 +38,6 @@ export default function PhotoAlbum() {
 
   const handleLongPressStart = () => {
     const timeout = setTimeout(() => {
-      // Capture dimensions of the front face
       if (frontRef.current) {
         const { offsetWidth: width, offsetHeight: height } = frontRef.current;
         setCardDimensions({ width, height });
@@ -80,6 +78,8 @@ export default function PhotoAlbum() {
     <div
       className="flex flex-col items-center justify-center h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 w-full"
       onDoubleClick={handleDoubleClick}
+      onContextMenu={(e) => e.preventDefault()} // Sağ tıklamayı devre dışı bırak
+      style={{ userSelect: 'none' }} // Yazı seçimini devre dışı bırak
     >
       <CardFlip isFlipped={isFlipped} flipDirection="horizontal">
         {/* Ön Yüz */}
