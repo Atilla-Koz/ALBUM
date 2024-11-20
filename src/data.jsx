@@ -35,228 +35,260 @@ import ah from './assets/Photos/34.jpg';
 import ai from './assets/Photos/35.jpg';
 import aj from './assets/Photos/36.jpg';
 import ak from './assets/Photos/37.jpg';
+import kalpSrc from './assets/Photos/kalp.svg';
 
 export const images = [
   {
+    src: t,
+    date: 'İyi Ki Doğdunnnnn ',
+    description: (
+      <span className="flex flex-row items-center justify-center font-bold text-black text-xl">
+        A{' '}
+        <img
+          src={kalpSrc}
+          alt="kalp"
+          style={{ width: '20px', height: '20px' }}
+        />
+      </span>
+    ),
+    secondDescription:
+      'Biraz Daha Eski Zamanlarda Tanışsaydık Tarzımız Bu Şekil Olurdu Sanırım',
+  },
+  {
     src: a,
-    date: '2023-11-01',
-    description: 'Güneşli bir gün sahilde.',
-    secondDescription: 'Güneşli bir gün sahilde.',
+    date: '04-09-2019',
+    description: 'Horse Safari',
+    secondDescription: 'Beyaz Atlı Bir "Prenses".',
   },
   {
     src: b,
-    date: '2023-10-15',
-    description: 'Ormanda yürüyüş keyfi.',
-    secondDescription: 'Ormanda yürüyüş keyfi.',
+    date: '01-05-2016',
+    description: 'Mr. & Mrs. Smith',
+    secondDescription:
+      'İki Farklı Fünyanın Gölgesinde, Sırt sırta Bir Paylaşım..."',
   },
   {
     src: c,
-    date: '2023-09-10',
-    description: 'Dağlarda huzurlu bir an.',
-    secondDescription: 'Dağlarda huzurlu bir an.',
+    date: '18-08-2024',
+    description: 'Biraz iskambil ?',
+    secondDescription: 'Küçük Oyun Bozanlklar Yaşanmış Olabilir...',
   },
   {
     src: d,
-    date: '2023-08-20',
-    description: 'Bir kamp ateşi etrafında.',
-    secondDescription: 'Bir kamp ateşi etrafında.',
+    date: '15-08-2024',
+    description: 'GÜNAYDIN',
+    secondDescription:
+      'Buraya Uyumadığın Bir Filmin Fotoğrafını Koymak İsterdim :)',
   },
   {
     src: e,
-    date: '2023-07-30',
-    description: 'Bir kamp ateşi etrafında.',
-    secondDescription: 'Bir kamp ateşi etrafında.',
+    date: '14-08-2024',
+    description: 'Deniz İle İlk Selfie !',
+    secondDescription: 'Kameraya Baktırmak İçin Ne Yaptın Çocuğa Doğru söyle !',
   },
   {
     src: f,
-    date: '2023-06-25',
-    description: 'Bir kamp ateşi etrafında.',
-    secondDescription: 'Bir kamp ateşi etrafında.',
+    date: '14-08-2024',
+    description: 'Moda İkonu !',
+    secondDescription:
+      'İçindeki Çocuğu Yaşat Cümlesini Çocuk Gözlüğü Tak İle Karıştırmıışsın Sanırım.',
   },
   {
     src: g,
-    date: '2023-05-10',
-    description: 'Şehirde bir akşam.',
-    secondDescription: 'Şehirde bir akşam.',
+    date: '02-11-2023',
+    description: 'KEPENEK!',
+    secondDescription:
+      'Kepeneği Senin Üzerinde Görünce İnsanın Çoban Olası Geliyor XD.',
   },
   {
     src: h,
-    date: '2023-04-15',
-    description: 'Tarihi bir bina ziyareti.',
-    secondDescription: 'Tarihi bir bina ziyareti.',
+    date: '17-06-2016',
+    description: 'Lise Mezuniyeti !',
+    secondDescription:
+      'Ah ! Bir Dönem Biterken Gelecek Dönemlerde de Aynı Bu Şekilde Beraberlik Daim Olsun !',
   },
   {
     src: i,
-    date: '2023-03-20',
-    description: 'Baharın ilk çiçekleri.',
-    secondDescription: 'Baharın ilk çiçekleri.',
+    date: '24-06-2024',
+    description: 'CHEERS!',
+    secondDescription:
+      'Ne Olmuş Yani Enesin Dediğini Anlamayıp Yemek İçin Akasyaya Gittiysek Ne yani Neee...',
   },
   {
     src: j,
-    date: '2023-02-14',
-    description: 'Karlı bir gün yürüyüşü.',
-    secondDescription: 'Karlı bir gün yürüyüşü.',
+    date: '30-09-2023',
+    description: 'Yeşilada Roof Dıp Tıs Dıp Tısss !',
+    secondDescription: 'Yeşilada Çatı Katına Da Dahil Olunmuşsa Mikemmel',
   },
   {
     src: k,
-    date: '2023-01-01',
-    description: 'Yeni yıl kutlaması.',
-    secondDescription: 'Yeni yıl kutlaması.',
+    date: '27-06-2023',
+    description: 'Rakı Rakı !',
+    secondDescription: 'Amanın Şehirin Işıkları Gölgede Kalmış !',
   },
   {
     src: l,
-    date: '2022-12-25',
-    description: 'Noel ışıkları.',
-    secondDescription: 'Noel ışıkları.',
+    date: '27-06-2023',
+    description: 'Mezuniyet Balosu (Alev İmojisi)',
+    secondDescription: 'Görüyorsunuz Söze Gerek Yok !',
   },
   {
     src: m,
-    date: '2022-11-15',
-    description: 'Sonbahar renkleri.',
-    secondDescription: 'Sonbahar renkleri.',
+    date: '23-11-2019',
+    description: 'Tatbikat Sahnesi',
+    secondDescription:
+      'Ankara Tiyatrosunun Farklı Bir Enerjisi Var Galiba. O Dili Var ya...',
   },
   {
     src: n,
-    date: '2022-10-30',
-    description: 'Yapraklarla dolu bir park.',
-    secondDescription: 'Yapraklarla dolu bir park.',
+    date: '03-02-2023',
+    description: 'İstanbul Da Adı Lazım Değil Bir oyun...',
+    secondDescription:
+      'Başımıza Geleceklerden Habersiz Eğlenmişiz Bir Süre En Azından.',
   },
   {
     src: o,
-    date: '2022-09-01',
-    description: 'Doğada meditasyon.',
-    secondDescription: 'Doğada meditasyon.',
+    date: '09-07-2016',
+    description: 'Can Gox Konseri.',
+    secondDescription:
+      'Adam Yalnız Olanlar Kendini Belli Etsin Dediği An Rahibe Terasa Olsa Bu kadar Şehvetli Kendini Belli Edemzdi XD',
   },
   {
     src: p,
-    date: '2022-08-20',
-    description: 'Yaz tatili anıları.',
-    secondDescription: 'Yaz tatili anıları.',
+    date: '26-11-2016',
+    description: 'Ankara Geceleri.',
+    secondDescription:
+      'Ulen Ankaraya Geldiğim ilk Sene Bilkente Gireceğim Diye Dötüm Çıkmıştı Ama Ama Değdi :)',
   },
   {
     src: q,
-    date: '2022-07-15',
-    description: 'Gölde kayık turu.',
-    secondDescription: 'Gölde kayık turu.',
+    date: '16-03-2021',
+    description: 'Kulaklar Delinsin O Zaman !',
+    secondDescription: 'Adamın Gevşekliğine Rağmen Yine İyi Gülmüşün Be !',
   },
   {
     src: r,
-    date: '2022-06-10',
-    description: 'Çiçekli bir bahçe.',
-    secondDescription: 'Çiçekli bir bahçe.',
+    date: '11-04-2023',
+    description: 'En Sevdiğim Fotoğraflardan Biri :).',
+    secondDescription:
+      'Ozan Güveni Gördün Diye Oturtursan Bizi, Böyle Pozlar Beliriverir.',
   },
   {
     src: s,
-    date: '2022-05-05',
-    description: 'Sabah kahvesi eşliğinde manzara.',
-    secondDescription: 'Sabah kahvesi eşliğinde manzara.',
+    date: '30-06-2024',
+    description: 'O Zaaman Biraz Tenis Sonrası Fotoğaf',
+    secondDescription:
+      'Neden Bu Fotoğraf Dersen. Çünkü Maç Sonucu Ben Kazanmışım Gibi İfaden var :)',
   },
-  {
-    src: t,
-    date: '2022-04-01',
-    description: 'Şehir manzarası gece.',
-    secondDescription: 'Şehir manzarası gece.',
-  },
+
   {
     src: u,
-    date: '2022-03-20',
-    description: 'Yağmurlu bir sokakta yürüyüş.',
-    secondDescription: 'Yağmurlu bir sokakta yürüyüş.',
+    date: '06-08-2024',
+    description: 'Deniz İle First Date !',
+    secondDescription: 'O Günden Beri Seni Arıyor Çocuk Be !',
   },
   {
     src: v,
-    date: '2022-02-10',
-    description: 'Karlı bir dağ zirvesi.',
-    secondDescription: 'Karlı bir dağ zirvesi.',
+    date: '22-07-2019',
+    description: 'Sushi !',
+    secondDescription:
+      'Marmaris Gibi Bir Yerde Gidebilecek Tek Bir Yer Varken Ne İşimiz Var Burada Meçhul...',
   },
   {
     src: w,
-    date: '2022-01-01',
-    description: 'Yeni yılın ilk günü.',
-    secondDescription: 'Yeni yılın ilk günü.',
+    date: '09-08-2024',
+    description: 'Hollanda Temalı Bir Denizzz ',
+    secondDescription:
+      'Çocuğun Aklına Çok Erken Giriyorsun Anası Döver Bizi...',
   },
   {
     src: x,
-    date: '2021-12-25',
-    description: 'Noel ağacı.',
-    secondDescription: 'Noel ağacı.',
+    date: '23-08-2024',
+    description: 'İlk Uçak Yolculumuz Efenim !',
+    secondDescription: 'Ne Yani Birazcık Gözüm Dalıp Kapanmışsa.',
   },
   {
     src: y,
-    date: '2021-11-11',
-    description: 'Kamp çadırı manzarası.',
-    secondDescription: 'Kamp çadırı manzarası.',
+    date: '28-04-2024',
+    description: 'Bir Tenis Macerasının Ayak Sesleri.',
+    secondDescription:
+      'İremin Tenis Konusu Açması İle Beraber Gidilen Bir Challengers Film Günü.Filmden Alınan Tek Şey Tenistir Umarım XD',
   },
   {
     src: z,
-    date: '2021-10-10',
-    description: 'Göl kenarında bir gün.',
-    secondDescription: 'Göl kenarında bir gün.',
+    date: '23-08-2024',
+    description: 'Uçalım Gidelim Bu Şehirden...',
+    secondDescription: 'Araba Seyahatinde Uyumam Söz...',
   },
   {
     src: aa,
-    date: '2021-09-15',
-    description: 'Deniz kenarında gün batımı.',
-    secondDescription: 'Deniz kenarında gün batımı.',
+    date: '24-09-2023',
+    description: 'Balat sokakları.',
+    secondDescription:
+      'O Gün Beni Fotoğraf Çekemedim Diye Dövmedeyisen Daha Da Dövmezsin asdjsjdjasd',
   },
   {
     src: ab,
     date: '2021-08-20',
-    description: 'Ormanda bir yürüyüş.',
-    secondDescription: 'Ormanda bir yürüyüş.',
+    description: 'O zaman Biraz Sefalet.',
+    secondDescription: 'O Gün Makinist Kornayı Bence Sana Çalmıştı :)',
   },
   {
     src: ac,
-    date: '2021-07-25',
-    description: 'Kamp ateşi.',
-    secondDescription: 'Kamp ateşi.',
+    date: '06-09-2024',
+    description: 'O zaman Biraz Daha Tenis Sonrası.',
+    secondDescription: 'Meşhur Heykel Taklidin O Günden.',
   },
   {
     src: ad,
-    date: '2021-06-30',
-    description: 'Yaz günü şenlikleri.',
-    secondDescription: 'Yaz günü şenlikleri.',
+    date: '20-11-2023',
+    description: 'İYİ Kİ DOĞDUN !',
+    secondDescription: 'İnsan Her Yaşında Daha mı Güzelleşir ?',
   },
   {
     src: ae,
-    date: '2021-05-10',
-    description: 'Bahar festivali.',
-    secondDescription: 'Bahar festivali.',
+    date: '9-08-2023',
+    description: 'Hayko Cepkin',
+    secondDescription:
+      'Güzel Yer Seçimi Yapıyorsun Yalan Yok. Köşede Bu Kadar Dağılamazdık :)',
   },
   {
     src: af,
-    date: '2021-04-01',
-    description: 'Şehir merkezinde bir gün.',
-    secondDescription: 'Şehir merkezinde bir gün.',
+    date: '16-12-2022',
+    description: 'Ablan Star Bebeğim',
+    secondDescription: 'Bu da İstanbula Geldin Geleli İlk Görüşmemiz :)',
   },
   {
     src: ag,
-    date: '2021-03-15',
-    description: 'Bir tepeye tırmanış.',
-    secondDescription: 'Bir tepeye tırmanış.',
+    date: '16-12-2022',
+    description: 'İlk Rakı !',
+    secondDescription:
+      'Farklı İnsanlarla Rakı Sofralarına Oturduk; Kimi Geldi, Kimi Geçti, Bir Tek Sen Geçmedin. Daim Ol!',
   },
   {
     src: ah,
-    date: '2021-02-10',
-    description: 'Kış festivali.',
-    secondDescription: 'Kış festivali.',
+    date: '24-11-2018',
+    description: 'Bir Ankara Klasiği',
+    secondDescription: 'Ankara Gecelerini Bile Isıtıyorsun Be !',
   },
   {
     src: ai,
-    date: '2021-01-01',
-    description: 'Yeni yıl başlangıcı.',
-    secondDescription: 'Yeni yıl başlangıcı.',
+    date: '23-11-2019',
+    description: 'Yeniden Dokunan Hayatlar',
+    secondDescription:
+      'Oyunu Hatırlar Mısın Bilmem Ama İzlediklerim Arasında En İyilerden Biriydi. 3 Tiyatrocu Kadının Hikayesi.',
   },
   {
     src: aj,
-    date: '2020-12-25',
-    description: 'Noel zamanı.',
-    secondDescription: 'Noel zamanı.',
+    date: '25-03-2023',
+    description: 'eeeee.',
+    secondDescription: 'Burada Ne Oluyor Bilmiyorum Doğrusu...',
   },
   {
     src: ak,
-    date: '2020-11-10',
-    description: 'Göl manzaralı bir gün.',
-    secondDescription: 'Göl manzaralı bir gün.',
+    date: '07-12-2015',
+    description: 'Bir Dağ Gezintisi',
+    secondDescription:
+      'O Zaman Seni Bilmezdim Ama Şu An Bilerek Nasıl İkna olup Da Oralara Çıktığını Merak Ediyorum. Motivasyonun Neydi?',
   },
 ];
