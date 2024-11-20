@@ -14,10 +14,11 @@ export default function PhotoAlbum() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [isRotating, setIsRotating] = useState(false);
+  const [longPressTimeout, setLongPressTimeout] = useState(null);
   const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
 
   const frontRef = useRef(null);
-  const touchStartRef = useRef(null); // Kaydırma başlangıç pozisyonunu tutar
+  const touchStartRef = useRef(null);
 
   const getRandomImage = () => {
     let randomIndex = Math.floor(Math.random() * images.length);
@@ -36,8 +37,25 @@ export default function PhotoAlbum() {
     }, 600);
   };
 
+  const handleLongPressStart = () => {
+    const timeout = setTimeout(() => {
+      if (frontRef.current) {
+        const { offsetWidth: width, offsetHeight: height } = frontRef.current;
+        setCardDimensions({ width, height });
+      }
+      setIsFlipped((prev) => !prev);
+    }, 500);
+    setLongPressTimeout(timeout);
+  };
+
+  const handleLongPressEnd = () => {
+    if (longPressTimeout) {
+      clearTimeout(longPressTimeout);
+      setLongPressTimeout(null);
+    }
+  };
+
   const handleTouchStart = (e) => {
-    // Dokunma başlangıç pozisyonunu kaydet
     const touch = e.touches[0];
     touchStartRef.current = { x: touch.clientX, y: touch.clientY };
   };
@@ -48,15 +66,13 @@ export default function PhotoAlbum() {
     const touch = e.touches[0];
     const deltaX = touch.clientX - touchStartRef.current.x;
 
-    // Sola veya sağa kaydırma hareketini algıla
     if (Math.abs(deltaX) > 100) {
-      // Flip hareketini tetikle
       if (frontRef.current) {
         const { offsetWidth: width, offsetHeight: height } = frontRef.current;
         setCardDimensions({ width, height });
       }
       setIsFlipped((prev) => !prev);
-      touchStartRef.current = null; // Kaydırma işlemi tamamlandı
+      touchStartRef.current = null; // Kaydırma işlemini sıfırla
     }
   };
 
@@ -98,6 +114,9 @@ export default function PhotoAlbum() {
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
           className={`p-6 bg-white rounded-3xl shadow-2xl text-center transform transition-transform duration-500 ${
             isRotating ? 'rotate-y-180' : ''
           }`}
@@ -117,6 +136,12 @@ export default function PhotoAlbum() {
             width: cardDimensions.width || 'auto',
             height: cardDimensions.height || 'auto',
           }}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          onMouseDown={handleLongPressStart}
+          onMouseUp={handleLongPressEnd}
+          onMouseLeave={handleLongPressEnd}
           className="p-6 bg-white rounded-3xl shadow-2xl text-center flex flex-col items-center justify-center"
         >
           <p className="text-lg font-semibold text-gray-700">
