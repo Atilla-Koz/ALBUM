@@ -16,16 +16,26 @@ export default function PhotoAlbum() {
   const [isRotating, setIsRotating] = useState(false);
   const [longPressTimeout, setLongPressTimeout] = useState(null);
   const [cardDimensions, setCardDimensions] = useState({ width: 0, height: 0 });
+  const [shownCards, setShownCards] = useState([]); // Gösterilen kartların indekslerini tutar
 
   const frontRef = useRef(null);
   const touchStartRef = useRef(null);
 
   const getRandomImage = () => {
-    let randomIndex = Math.floor(Math.random() * images.length);
-    while (randomIndex === currentIndex) {
-      randomIndex = Math.floor(Math.random() * images.length);
+    let remainingCards = images
+      .map((_, index) => index)
+      .filter((index) => !shownCards.includes(index));
+
+    if (remainingCards.length === 0) {
+      // Eğer tüm kartlar gösterildiyse, listeyi sıfırla
+      setShownCards([]);
+      remainingCards = images.map((_, index) => index);
     }
+
+    const randomIndex =
+      remainingCards[Math.floor(Math.random() * remainingCards.length)];
     setCurrentIndex(randomIndex);
+    setShownCards((prev) => [...prev, randomIndex]);
   };
 
   const handleDoubleClick = () => {
@@ -72,12 +82,12 @@ export default function PhotoAlbum() {
         setCardDimensions({ width, height });
       }
       setIsFlipped((prev) => !prev);
-      touchStartRef.current = null; // Kaydırma işlemini sıfırla
+      touchStartRef.current = null;
     }
   };
 
   const handleTouchEnd = () => {
-    touchStartRef.current = null; // Kaydırma başlangıcını sıfırla
+    touchStartRef.current = null;
   };
 
   useEffect(() => {
