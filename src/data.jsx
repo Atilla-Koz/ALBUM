@@ -65,7 +65,7 @@ export const images = [
     date: '01-05-2016',
     description: 'Mr. & Mrs. Smith',
     secondDescription:
-      'İki Farklı Fünyanın Gölgesinde, Sırt sırta Bir Paylaşım..."',
+      'İki Farklı Dünyanın Gölgesinde, Sırt sırta Bir Paylaşım..."',
   },
   {
     src: c,
